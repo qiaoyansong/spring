@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spring.dao.InfoMapper">
+	<select id="getAllInfo" resultType="Info">
+		SELECT
+		*
+		FROM
+		info
+	</select>
+	<select id="getInfoById" resultType="Info">
+		SELECT 
+		*
+		FROM
+		info
+		WHERE
+		id =#{id}
+	</select>
+	<update id="updateInfoById">
+		UPDATE
+		info
+		<set>
+			<if test="temperature !=null">
+				temperature = #{temperature},
+			</if>
+			<if test="address !=null">
+				address = #{address},
+			</if>
+			<if test="leaveTime !=null">
+				leave_time = #{leaveTime},
+			</if>
+		</set>
+		WHERE
+		id = #{id}
+	</update>
+	<delete id="deleteInfoById">
+		DELETE
+		FROM
+		info
+		WHERE
+		id = #{id}
+	</delete>
+	<insert id="insertInfo" useGeneratedKeys="true" keyProperty="id">
+		INSERT 
+		INTO
+		info(temperature,address,leave_time) 
+		VALUES (#{temperature},#{address},#{leaveTime});
+	</insert>
+</mapper>
